@@ -37,6 +37,9 @@ public class Employee {
 	protected Employee() {}
 
 	public Employee(String firstName, String lastName, String description, int jobYears) {
+		if (!isStringParameterValid(firstName) || !isStringParameterValid(lastName) || !isStringParameterValid(description) || !isJobYearsValid(jobYears)) {
+			throw new IllegalArgumentException("Invalid parameters");
+		}
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.description = description;
@@ -74,6 +77,9 @@ public class Employee {
 	}
 
 	public void setFirstName(String firstName) {
+		if (!isStringParameterValid(firstName)) {
+			throw new IllegalArgumentException("Invalid parameters");
+		}
 		this.firstName = firstName;
 	}
 
@@ -82,6 +88,9 @@ public class Employee {
 	}
 
 	public void setLastName(String lastName) {
+		if (!isStringParameterValid(lastName)) {
+			throw new IllegalArgumentException("Invalid parameters");
+		}
 		this.lastName = lastName;
 	}
 
@@ -90,6 +99,9 @@ public class Employee {
 	}
 
 	public void setDescription(String description) {
+		if (!isStringParameterValid(description)) {
+			throw new IllegalArgumentException("Invalid parameters");
+		}
 		this.description = description;
 	}
 
@@ -98,6 +110,9 @@ public class Employee {
 	}
 
 	public void setJobYears(int jobYears) {
+		if (!isJobYearsValid(jobYears)) {
+			throw new IllegalArgumentException("Invalid parameters");
+		}
 		this.jobYears = jobYears;
 	}
 
@@ -111,5 +126,12 @@ public class Employee {
 			", jobYears='" + jobYears + '\'' +
 			'}';
 	}
+	private boolean isStringParameterValid(String x) {
+        return x != null && !x.isBlank();
+    }
+
+	private boolean isJobYearsValid(int x) {
+		return x >= 0;
+    }
 }
 // end::code[]
