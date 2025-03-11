@@ -22,50 +22,59 @@ class EmployeeTest {
     @Test
     void shouldSuccessfullyCreateAnObjectEmployee() throws Exception {
         // arrange + act
-        Employee employee = new Employee("Andre", "Salgado", "SWITCH Student", 1);
+        Employee employee = new Employee("Andre", "Salgado", "Graduated", "SWITCH Student", 1);
 
         //assert
         assertEquals("Andre", employee.getFirstName());
         assertEquals("Salgado", employee.getLastName());
-        assertEquals("SWITCH Student", employee.getDescription());
+        assertEquals("Graduated", employee.getDescription());
+        assertEquals("SWITCH Student", employee.getJobTitle());
         assertEquals(1, employee.getJobYears());
     }
 
     @Test
     void testEmployeeConstructorInvalidFirstName() {
         //arrenge + act + assert
-        assertThrows(IllegalArgumentException.class, () -> new Employee("", "Salgado", "SWITCH Student", 1));
-        assertThrows(IllegalArgumentException.class, () -> new Employee(" ", "Salgado", "SWITCH Student", 1));
-        assertThrows(IllegalArgumentException.class, () -> new Employee(null, "Salgado", "SWITCH Student", 1));
+        assertThrows(IllegalArgumentException.class, () -> new Employee("", "Salgado", "Graduated","SWITCH Student", 1));
+        assertThrows(IllegalArgumentException.class, () -> new Employee(" ", "Salgado", "Graduated", "SWITCH Student", 1));
+        assertThrows(IllegalArgumentException.class, () -> new Employee(null, "Salgado", "Graduated", "SWITCH Student", 1));
     }
 
     @Test
     void testEmployeeConstructorInvalidLastName() {
         //arrenge + act + assert
-        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "", "SWITCH Student", 1));
-        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", " ", "SWITCH Student", 1));
-        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", null, "SWITCH Student", 1));
+        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "", "Graduated", "SWITCH Student", 1));
+        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", " ", "Graduated", "SWITCH Student", 1));
+        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", null, "Graduated", "SWITCH Student", 1));
     }
 
     @Test
     void testEmployeeConstructorInvalidDescription() {
         //arrenge + act + assert
-        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "", 1));
-        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", " ", 1));
-        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", null, 1));
+        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "", "SWITCH Student",1));
+        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", " ", "SWITCH Student", 1));
+        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", null, "SWITCH Student", 1));
+    }
+
+    @Test
+    void testEmployeeConstructorInvalidJobTitle() {
+        //arrenge + act + assert
+        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "Graduated", "",1));
+        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "Graduated", " ", 1));
+        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "Graduated", null, 1));
     }
 
     @Test
     void testEmployeeConstructorInvalidJobYear() {
         //arrenge + act + assert
-        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "SWITCH Student", -1));
-        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "SWITCH Student", -2));
+        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "Graduated","SWITCH Student", -1));
+        assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "Graduated", "SWITCH Student", -2));
     }
 
     @Test
     void testSetFirstNameValid() {
         //arrenge
-        Employee employee = new Employee("Andre", "Salgado", "SWITCH Student", 1);
+        Employee employee = new Employee("Andre", "Salgado", "Graduated", "SWITCH Student", 1);
         //act
         employee.setFirstName("Fulano");
         //assert
@@ -75,7 +84,7 @@ class EmployeeTest {
     @Test
     void testSetFirstNameInvalid() {
         //arrenge
-        Employee employee = new Employee("Andre", "Salgado", "SWITCH Student", 1);
+        Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
         //act + assert
         assertThrows(IllegalArgumentException.class, () -> employee.setFirstName(""));
     }
@@ -83,7 +92,7 @@ class EmployeeTest {
     @Test
     void testSetLastNameValid() {
         //arrenge
-        Employee employee = new Employee("Andre", "Salgado", "SWITCH Student", 1);
+        Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
         //act
         employee.setLastName("Doce");
         //assert
@@ -93,7 +102,7 @@ class EmployeeTest {
     @Test
     void testSetLastNameInvalid() {
         //arrenge
-        Employee employee = new Employee("Andre", "Salgado", "SWITCH Student", 1);
+        Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
         //act + assert
         assertThrows(IllegalArgumentException.class, () -> employee.setLastName(""));
     }
@@ -101,7 +110,7 @@ class EmployeeTest {
     @Test
     void testSetDescriptionValid() {
         //arrenge
-        Employee employee = new Employee("Andre", "Salgado", "SWITCH Student", 1);
+        Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
         //act
         employee.setDescription("Junior Developer");
         //assert
@@ -109,9 +118,19 @@ class EmployeeTest {
     }
 
     @Test
+    void testSetJobTitleValid() {
+        //arrenge
+        Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
+        //act
+        employee.setJobTitle("Junior Developer");
+        //assert
+        assertEquals("Junior Developer", employee.getJobTitle());
+    }
+
+    @Test
     void testSetDescriptionInvalid() {
         //arrenge
-        Employee employee = new Employee("Andre", "Salgado", "SWITCH Student", 1);
+        Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
         //act + assert
         assertThrows(IllegalArgumentException.class, () -> employee.setDescription(""));
     }
@@ -119,7 +138,7 @@ class EmployeeTest {
     @Test
     void testSetJobYearsValid() {
         //arrenge
-        Employee employee = new Employee("Andre", "Salgado", "SWITCH Student", 1);
+        Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
         //act
         employee.setJobYears(10);
         //assert
@@ -129,7 +148,7 @@ class EmployeeTest {
     @Test
     void testSetJobYearsInvalid() {
         //arrenge
-        Employee employee = new Employee("Andre", "Salgado", "SWITCH Student", 1);
+        Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
         //act + assert
         assertThrows(IllegalArgumentException.class, () -> employee.setJobYears(-1));
     }
@@ -137,8 +156,8 @@ class EmployeeTest {
     @Test
     void testEqualsAndHashCodeWithIdenticalEmployees() {
         //arrenge
-        Employee employee1 = new Employee("Andre", "Salgado", "SWITCH Student", 1);
-        Employee employee2 = new Employee("Andre", "Salgado", "SWITCH Student", 1);
+        Employee employee1 = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
+        Employee employee2 = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
         //act + assert
         assertTrue(employee1.equals(employee2));
         assertEquals(employee1.hashCode(), employee2.hashCode());
@@ -147,8 +166,8 @@ class EmployeeTest {
     @Test
     void testEqualsAndHashCodeWithDifferentEmployees() {
         //arrenge
-        Employee employee1 = new Employee("Andre", "Salgado", "SWITCH Student", 1);
-        Employee employee2 = new Employee("Fulano", "Doce", "Junior Developer", 1);
+        Employee employee1 = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
+        Employee employee2 = new Employee("Fulano", "Doce", "Master","Junior Developer", 1);
         //act + assert
         assertFalse(employee1.equals(employee2));
         assertNotEquals(employee1.hashCode(), employee2.hashCode());
@@ -157,9 +176,9 @@ class EmployeeTest {
     @Test
     void testToString() {
         //arrenge
-        Employee employee = new Employee("Andre", "Salgado", "SWITCH Student", 1);
+        Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
         //act
-        String expectedString = "Employee{id=null, firstName='Andre', lastName='Salgado', description='SWITCH Student', jobYears='1'}";
+        String expectedString = "Employee{id=null, firstName='Andre', lastName='Salgado', description='Graduated', jobTitle='SWITCH Student', jobYears='1'}";
         //assert
         assertEquals(expectedString, employee.toString());
     }
@@ -167,7 +186,7 @@ class EmployeeTest {
     @Test
     void testGetId() {
         //arrenge + act
-        Employee employee = new Employee("Andre", "Salgado", "SWITCH Student", 1);
+        Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
 
         //assert
         assertNull(employee.getId());
@@ -176,7 +195,7 @@ class EmployeeTest {
     @Test
     void testSetId() {
         //arrenge
-        Employee employee = new Employee("John", "Doe", "Developer", 5);
+        Employee employee = new Employee("John", "Doe", "NoDescription","Developer", 5);
         Long newId = 123L;
         //act
         employee.setId(newId);

@@ -32,17 +32,19 @@ public class Employee {
 	private String firstName;
 	private String lastName;
 	private String description;
+	private String jobTitle;
 	private int jobYears;
 
 	protected Employee() {}
 
-	public Employee(String firstName, String lastName, String description, int jobYears) {
-		if (!isStringParameterValid(firstName) || !isStringParameterValid(lastName) || !isStringParameterValid(description) || !isJobYearsValid(jobYears)) {
+	public Employee(String firstName, String lastName, String description, String jobTitle,int jobYears) {
+		if (!isStringParameterValid(firstName) || !isStringParameterValid(lastName) || !isStringParameterValid(description) || !isStringParameterValid(jobTitle) || !isJobYearsValid(jobYears)) {
 			throw new IllegalArgumentException("Invalid parameters");
 		}
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.description = description;
+		this.jobTitle = jobTitle;
 		this.jobYears = jobYears;
 	}
 
@@ -55,13 +57,14 @@ public class Employee {
 			Objects.equals(firstName, employee.firstName) &&
 			Objects.equals(lastName, employee.lastName) &&
 			Objects.equals(description, employee.description) &&
+			Objects.equals(jobTitle, employee.jobTitle) &&
 			Objects.equals(jobYears, employee.jobYears);
 	}
 
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(id, firstName, lastName, description, jobYears);
+		return Objects.hash(id, firstName, lastName, description, jobTitle, jobYears);
 	}
 
 	public Long getId() {
@@ -105,6 +108,17 @@ public class Employee {
 		this.description = description;
 	}
 
+	public String getJobTitle() {
+		return jobTitle;
+	}
+
+	public void setJobTitle(String jobTitle) {
+		if (!isStringParameterValid(jobTitle)) {
+			throw new IllegalArgumentException("Invalid parameters");
+		}
+		this.jobTitle = jobTitle;
+	}
+
 	public int getJobYears() {
 		return jobYears;
 	}
@@ -123,6 +137,7 @@ public class Employee {
 			", firstName='" + firstName + '\'' +
 			", lastName='" + lastName + '\'' +
 			", description='" + description + '\'' +
+			", jobTitle='" + jobTitle + '\'' +
 			", jobYears='" + jobYears + '\'' +
 			'}';
 	}
