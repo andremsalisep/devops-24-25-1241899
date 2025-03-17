@@ -1,0 +1,438 @@
+# CA1: Version Control with Git: Technical Report
+
+**Author:** André Salgado
+**Date:** 12/03/2025
+**Course:** DevOps
+**Programme:** SWitCH DEV
+**Institution:** ISEP
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Assignment Setup](#assignment-setup)
+- [Part 1: Developing in Master Branch](#part-1-development-in-master-branch)
+    - [Goals](#goals)
+    - [Development](#development)
+
+
+## Introduction
+This report details the **Class Assignment** 1 for the DevOps course. This assignment has two parts: **Part 1** Version Control with Git, and **Part 2** Build Tools with Gradle. Project results are detailed in the **Final Results** section.
+
+## Assignment Setup
+The first steps of the assignment are to clone the application to the computer local folder using **git clone <example-URL>** and then change directory using **cd** command to access the Basic folder and run the application using **./mvnw spring-boot:run**. After a few tweaks the application run successfully. 
+Following that, I made a new repository named after DevOps / School Year / Student ID. Then I cloned the repository to a local folder in my computer using **git clone <my-repository-URL>**.
+
+## Part 1: Developing in Master Branch
+
+### Goals
+-   Create CA1/part1 directory and copy the Basic folder from example repository into the new folder.
+-   Add a JobYears (integer) field to the application.
+-   Add support for the new field.
+-   Add unit tests for testing the creation of Employees and the validation of their attributes (for instance, no null/empty values).
+-   Debug the server and client parts of the solution.
+-   Once the new feature is completed (and tested) commit and push with a new tag (v1.2.0).
+-   At the end of the assignment mark the repository with the tag ca1-part1.1.
+
+
+### Development
+In the first part of the assignment setup tasks we are also asked to create a new folder using **mkdir CA1/part1** and then copied the Basic folder of the example application into part1 folder.
+After the part one setup, the first commit was made and pushed using the commands **git add .** and **git commit -m "Added basic files to repository"**. This first commit was then pushed via **git push -u origin master**.
+Following that, the commit was tagged with the command **git tag -a v1.1.0 -m "version 1.1.0"** and pushed with **git push --tags**.
+
+With everything now in place and the application running, it is time to add the JobYears field to the Employee file and parameter validation methods.
+It is worth mentioning that later in the development of Part 1 I noticed that in the Lecture class a JobTitle field was also asked during setup.
+Even tho it was included in a later fix, the development notes will consider it as being integrated at same time as JobYears.
+
+1. **Adding JobYears to Atributes:**
+
+```java
+public class Employee {
+
+    private @Id @GeneratedValue Long id; // <2>
+	private String firstName;
+	private String lastName;
+	private String description;
+	private String jobTitle;
+	private int jobYears;
+```
+
+2. **Adding Parameter Validation Methods:**
+
+```java
+private boolean isStringParameterValid(String x) {
+return x != null && !x.isBlank();
+}
+
+private boolean isJobYearsValid(int x) {
+    return x >= 0;
+}
+```
+
+3. **Adding Parameter and validations to Constructor:**
+
+```java
+public Employee(String firstName, String lastName, String description, String jobTitle,int jobYears) {
+    if (!isStringParameterValid(firstName) || !isStringParameterValid(lastName) || !isStringParameterValid(description) || !isStringParameterValid(jobTitle) || !isJobYearsValid(jobYears)) {
+        throw new IllegalArgumentException("Invalid parameters");
+    }
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.description = description;
+    this.jobTitle = jobTitle;
+    this.jobYears = jobYears;
+}
+```
+
+4. **Adding fields to Equals Override:**
+
+```java
+@Override
+    public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Employee employee = (Employee) o;
+    return Objects.equals(id, employee.id) &&
+        Objects.equals(firstName, employee.firstName) &&
+        Objects.equals(lastName, employee.lastName) &&
+        Objects.equals(description, employee.description) &&
+        Objects.equals(jobTitle, employee.jobTitle) &&
+        Objects.equals(jobYears, employee.jobYears);
+}
+```
+
+5. **Adding fields to Hashcode Override:**
+
+```java
+@Override
+public int hashCode() {
+
+		return Objects.hash(id, firstName, lastName, description, jobTitle, jobYears);
+	}
+```
+
+6. **Adding Validation to Existing Setters:**
+
+Existing Setters received a new validation method: isStringParameterValid(String string).
+This is true for all existing setters as showed in the example bellow:
+
+```java
+public void setFirstName(String firstName) {
+    if (!isStringParameterValid(firstName)) {
+        throw new IllegalArgumentException("Invalid parameters");
+    }
+    this.firstName = firstName;
+}
+```
+
+7. **Adding new Getter and Setter for new fields:**
+
+```java
+Since news field were added, new getters and setters were added, including their validations:
+
+public String getJobTitle() {
+    return jobTitle;
+}
+
+public void setJobTitle(String jobTitle) {
+    if (!isStringParameterValid(jobTitle)) {
+        throw new IllegalArgumentException("Invalid parameters");
+    }
+    this.jobTitle = jobTitle;
+}
+
+public int getJobYears() {
+    return jobYears;
+}
+
+public void setJobYears(int jobYears) {
+    if (!isJobYearsValid(jobYears)) {
+        throw new IllegalArgumentException("Invalid parameters");
+    }
+    this.jobYears = jobYears;
+}
+```
+
+8. **Adding fields to toString Override:**
+
+```java
+@Override
+public String toString() {
+    return "Employee{" +
+        "id=" + id +
+        ", firstName='" + firstName + '\'' +
+        ", lastName='" + lastName + '\'' +
+        ", description='" + description + '\'' +
+        ", jobTitle='" + jobTitle + '\'' +
+        ", jobYears='" + jobYears + '\'' +
+        '}';
+}
+```
+
+9. **Adding fields to app.js file:**
+
+```javascript
+class EmployeeList extends React.Component{
+    render() {
+        const employees = this.props.employees.map(employee =>
+            <Employee key={employee._links.self.href} employee={employee}/>
+        );
+        return (
+            <table>
+                <tbody>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Description</th>
+                    <th>Job Title</th>
+                    <th>Job Years</th>
+                </tr>
+                {employees}
+                </tbody>
+            </table>
+        )
+    }
+}
+
+class Employee extends React.Component{
+    render() {
+        return (
+            <tr>
+                <td>{this.props.employee.firstName}</td>
+                <td>{this.props.employee.lastName}</td>
+                <td>{this.props.employee.description}</td>
+                <td>{this.props.employee.jobTitle}</td>
+                <td>{this.props.employee.jobYears}</td>
+            </tr>
+        )
+    }
+}
+```
+
+10. **Adding fields to DatabaseLoader.java file:**
+
+```java
+@Override
+public void run(String... strings) throws Exception { // <4>
+    this.repository.save(new Employee("Frodo", "Baggins", "hobbit", "ring bearer",2));
+}
+```
+
+11. **Tests for the Employee and it's new validation methods:**
+
+Extensive tests were created in order to get 100% coverage in all new fields and methods.
+You can see all introduced tests bellow:
+
+```java
+@Test
+void testEmployeeConstructorNoArgs() {
+    //arrenge
+    Employee employee = new Employee();
+    // act + assert
+    assertNotNull(employee);
+    assertNull(employee.getId());
+    assertNull(employee.getFirstName());
+    assertNull(employee.getLastName());
+    assertNull(employee.getDescription());
+    assertEquals(0, employee.getJobYears());
+}
+
+@Test
+void shouldSuccessfullyCreateAnObjectEmployee() throws Exception {
+    // arrange + act
+    Employee employee = new Employee("Andre", "Salgado", "Graduated", "SWITCH Student", 1);
+
+    //assert
+    assertEquals("Andre", employee.getFirstName());
+    assertEquals("Salgado", employee.getLastName());
+    assertEquals("Graduated", employee.getDescription());
+    assertEquals("SWITCH Student", employee.getJobTitle());
+    assertEquals(1, employee.getJobYears());
+}
+
+@Test
+void testEmployeeConstructorInvalidFirstName() {
+    //arrenge + act + assert
+    assertThrows(IllegalArgumentException.class, () -> new Employee("", "Salgado", "Graduated","SWITCH Student", 1));
+    assertThrows(IllegalArgumentException.class, () -> new Employee(" ", "Salgado", "Graduated", "SWITCH Student", 1));
+    assertThrows(IllegalArgumentException.class, () -> new Employee(null, "Salgado", "Graduated", "SWITCH Student", 1));
+}
+
+@Test
+void testEmployeeConstructorInvalidLastName() {
+    //arrenge + act + assert
+    assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "", "Graduated", "SWITCH Student", 1));
+    assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", " ", "Graduated", "SWITCH Student", 1));
+    assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", null, "Graduated", "SWITCH Student", 1));
+}
+
+@Test
+void testEmployeeConstructorInvalidDescription() {
+    //arrenge + act + assert
+    assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "", "SWITCH Student",1));
+    assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", " ", "SWITCH Student", 1));
+    assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", null, "SWITCH Student", 1));
+}
+
+@Test
+void testEmployeeConstructorInvalidJobTitle() {
+    //arrenge + act + assert
+    assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "Graduated", "",1));
+    assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "Graduated", " ", 1));
+    assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "Graduated", null, 1));
+}
+
+@Test
+void testEmployeeConstructorInvalidJobYear() {
+    //arrenge + act + assert
+    assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "Graduated","SWITCH Student", -1));
+    assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "Graduated", "SWITCH Student", -2));
+}
+
+@Test
+void testSetFirstNameValid() {
+    //arrenge
+    Employee employee = new Employee("Andre", "Salgado", "Graduated", "SWITCH Student", 1);
+    //act
+    employee.setFirstName("Fulano");
+    //assert
+    assertEquals("Fulano", employee.getFirstName());
+}
+
+@Test
+void testSetFirstNameInvalid() {
+    //arrenge
+    Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
+    //act + assert
+    assertThrows(IllegalArgumentException.class, () -> employee.setFirstName(""));
+}
+
+@Test
+void testSetLastNameValid() {
+    //arrenge
+    Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
+    //act
+    employee.setLastName("Doce");
+    //assert
+    assertEquals("Doce", employee.getLastName());
+}
+
+@Test
+void testSetLastNameInvalid() {
+    //arrenge
+    Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
+    //act + assert
+    assertThrows(IllegalArgumentException.class, () -> employee.setLastName(""));
+}
+
+@Test
+void testSetDescriptionValid() {
+    //arrenge
+    Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
+    //act
+    employee.setDescription("Junior Developer");
+    //assert
+    assertEquals("Junior Developer", employee.getDescription());
+}
+
+@Test
+void testSetJobTitleValid() {
+    //arrenge
+    Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
+    //act
+    employee.setJobTitle("Junior Developer");
+    //assert
+    assertEquals("Junior Developer", employee.getJobTitle());
+}
+
+@Test
+void testSetDescriptionInvalid() {
+    //arrenge
+    Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
+    //act + assert
+    assertThrows(IllegalArgumentException.class, () -> employee.setDescription(""));
+}
+
+@Test
+void testSetJobYearsValid() {
+    //arrenge
+    Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
+    //act
+    employee.setJobYears(10);
+    //assert
+    assertEquals(10, employee.getJobYears());
+}
+
+@Test
+void testSetJobYearsInvalid() {
+    //arrenge
+    Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
+    //act + assert
+    assertThrows(IllegalArgumentException.class, () -> employee.setJobYears(-1));
+}
+
+@Test
+void testEqualsAndHashCodeWithIdenticalEmployees() {
+    //arrenge
+    Employee employee1 = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
+    Employee employee2 = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
+    //act + assert
+    assertTrue(employee1.equals(employee2));
+    assertEquals(employee1.hashCode(), employee2.hashCode());
+}
+
+@Test
+void testEqualsAndHashCodeWithDifferentEmployees() {
+    //arrenge
+    Employee employee1 = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
+    Employee employee2 = new Employee("Fulano", "Doce", "Master","Junior Developer", 1);
+    //act + assert
+    assertFalse(employee1.equals(employee2));
+    assertNotEquals(employee1.hashCode(), employee2.hashCode());
+}
+
+@Test
+void testToString() {
+    //arrenge
+    Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
+    //act
+    String expectedString = "Employee{id=null, firstName='Andre', lastName='Salgado', description='Graduated', jobTitle='SWITCH Student', jobYears='1'}";
+    //assert
+    assertEquals(expectedString, employee.toString());
+}
+
+@Test
+void testGetId() {
+    //arrenge + act
+    Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1);
+
+    //assert
+    assertNull(employee.getId());
+}
+
+@Test
+void testSetId() {
+    //arrenge
+    Employee employee = new Employee("John", "Doe", "NoDescription","Developer", 5);
+    Long newId = 123L;
+    //act
+    employee.setId(newId);
+    //assert
+    assertEquals(newId, employee.getId());
+}
+```
+
+12. **Running Application and Debug:**
+
+To run the application we must first use the **cd** command in terminal to access the Basic folder and then **./mvnw spring-boot:run** to run it. Then to see if it is running, **http://localhost:8080/** is used.
+After that, we have confirmation that the new fields were successfully implemented.
+
+13. **Pushing and Tagging New Version:**
+
+During the previous steps, commits were being made with **git add .** and **git commit -m "message"** in the terminal.
+After that the **git push -u origin master** is used and then **git tag -a v1.2.0 -m "version 1.2.0"** and pushed with **git push --tags**
+
+As previously said, the JobTitle was made in a further "Fix v1.1.0" commit due to it being in the lecture class PDF and not exactly part of the class assignment PDF.
+But since it was asked to do so, it was made.
+
+
+## Part 2: 
