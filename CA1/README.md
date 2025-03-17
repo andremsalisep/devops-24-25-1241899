@@ -10,9 +10,12 @@
 
 - [Introduction](#introduction)
 - [Assignment Setup](#assignment-setup)
-- [Part 1: Developing in Master Branch](#part-1-development-in-master-branch)
-    - [Goals](#goals)
-    - [Development](#development)
+- [Part 1: Developing in Master Branch](#part-1-developing-in-master-branch)
+  - [Goals](#goals)
+  - [Development](#development)
+    - [Part 1.1](#part-11)
+    - [Part 1.2](#part-12)
+- [Part 2](#part-2)
 
 
 ## Introduction
@@ -42,6 +45,8 @@ Following that, the commit was tagged with the command **git tag -a v1.1.0 -m "v
 With everything now in place and the application running, it is time to add the JobYears field to the Employee file and parameter validation methods.
 It is worth mentioning that later in the development of Part 1 I noticed that in the Lecture class a JobTitle field was also asked during setup.
 Even tho it was included in a later fix, the development notes will consider it as being integrated at same time as JobYears.
+
+#### Part 1.1
 
 1. **Adding JobYears to Atributes:**
 
@@ -434,5 +439,10 @@ After that the **git push -u origin master** is used and then **git tag -a v1.2.
 As previously said, the JobTitle was made in a further "Fix v1.1.0" commit due to it being in the lecture class PDF and not exactly part of the class assignment PDF.
 But since it was asked to do so, it was made.
 
+14. **Marking assignment as Part 1.1**
 
-## Part 2: 
+With all that done, and the readme file ready, it is time to push the commits and tag it **git tag ca1-part1.1 -m "ca1-part1.1"** and **git push origin ca1-part1.1**.
+
+#### Part 1.2:
+
+## Part 2:
