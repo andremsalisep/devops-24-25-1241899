@@ -34,11 +34,12 @@ public class Employee {
 	private String description;
 	private String jobTitle;
 	private int jobYears;
+	private String email;
 
 	protected Employee() {}
 
-	public Employee(String firstName, String lastName, String description, String jobTitle,int jobYears) {
-		if (!isStringParameterValid(firstName) || !isStringParameterValid(lastName) || !isStringParameterValid(description) || !isStringParameterValid(jobTitle) || !isJobYearsValid(jobYears)) {
+	public Employee(String firstName, String lastName, String description, String jobTitle, int jobYears, String email) {
+		if (!isStringParameterValid(firstName) || !isStringParameterValid(lastName) || !isStringParameterValid(description) || !isStringParameterValid(jobTitle) || !isJobYearsValid(jobYears) || !isStringParameterValid(email)) {
 			throw new IllegalArgumentException("Invalid parameters");
 		}
 		this.firstName = firstName;
@@ -46,6 +47,7 @@ public class Employee {
 		this.description = description;
 		this.jobTitle = jobTitle;
 		this.jobYears = jobYears;
+		this.email = email;
 	}
 
 	@Override
@@ -58,13 +60,14 @@ public class Employee {
 			Objects.equals(lastName, employee.lastName) &&
 			Objects.equals(description, employee.description) &&
 			Objects.equals(jobTitle, employee.jobTitle) &&
-			Objects.equals(jobYears, employee.jobYears);
+			Objects.equals(jobYears, employee.jobYears) &&
+			Objects.equals(email, employee.email);
 	}
 
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(id, firstName, lastName, description, jobTitle, jobYears);
+		return Objects.hash(id, firstName, lastName, description, jobTitle, jobYears, email);
 	}
 
 	public Long getId() {
@@ -130,6 +133,17 @@ public class Employee {
 		this.jobYears = jobYears;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		if (!isStringParameterValid(email)) {
+			throw new IllegalArgumentException("Invalid parameters");
+		}
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
 		return "Employee{" +
@@ -139,6 +153,7 @@ public class Employee {
 			", description='" + description + '\'' +
 			", jobTitle='" + jobTitle + '\'' +
 			", jobYears='" + jobYears + '\'' +
+			", email='" + email + '\'' +
 			'}';
 	}
 	private boolean isStringParameterValid(String x) {
