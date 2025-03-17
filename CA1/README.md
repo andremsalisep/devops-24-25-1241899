@@ -25,7 +25,7 @@ This report details the **Class Assignment** 1 for the DevOps course. This assig
 The first steps of the assignment are to clone the application to the computer local folder using **git clone <example-URL>** and then change directory using **cd** command to access the Basic folder and run the application using **./mvnw spring-boot:run**. After a few tweaks the application run successfully. 
 Following that, I made a new repository named after DevOps / School Year / Student ID. Then I cloned the repository to a local folder in my computer using **git clone <my-repository-URL>**.
 
-## Part 1: Developing in Master Branch
+## Part 1
 
 ### Goals
 -   Create CA1/part1 directory and copy the Basic folder from example repository into the new folder.
@@ -46,7 +46,7 @@ With everything now in place and the application running, it is time to add the 
 It is worth mentioning that later in the development of Part 1 I noticed that in the Lecture class a JobTitle field was also asked during setup.
 Even tho it was included in a later fix, the development notes will consider it as being integrated at same time as JobYears.
 
-#### Part 1.1
+#### Part 1.1: Developing in Master Branch
 
 1. **Adding JobYears to Atributes:**
 
@@ -443,6 +443,122 @@ But since it was asked to do so, it was made.
 
 With all that done, and the readme file ready, it is time to push the commits and tag it **git tag ca1-part1.1 -m "ca1-part1.1"** and **git push origin ca1-part1.1**.
 
-#### Part 1.2:
+#### Part 1.2: Developing in Secondary Branch
+
+1. **Creating a new Branch**
+
+To create a new branch to develop the email field, we start using the command **git checkout -b email-field**.
+That will create a new branch called "email-field" and put us into it.
+
+2. **Adding email field to Employee Class**
+
+We start now adding the field to Employee class atributes and constructor, parameters, validations.:
+Bellow there will be only the relevant part:
+
+Atribute:
+```java
+private String email;
+```
+
+Parameter and Validation into Constructor:
+```java
+public Employee(String firstName, String lastName, String description, String jobTitle, int jobYears, String email) {
+  if (!isStringParameterValid(firstName) || !isStringParameterValid(lastName) || !isStringParameterValid(description) || !isStringParameterValid(jobTitle) || !isJobYearsValid(jobYears) || !isStringParameterValid(email)) {
+    throw new IllegalArgumentException("Invalid parameters");
+  }
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.description = description;
+  this.jobTitle = jobTitle;
+  this.jobYears = jobYears;
+  this.email = email;
+}
+```
+
+Adding the following line to Equals Override method:
+```java
+Objects.equals(email, employee.email);
+```
+
+Adding to hashCode Override:
+```java
+@Override
+public int hashCode() {
+
+		return Objects.hash(id, firstName, lastName, description, jobTitle, jobYears, email);
+}
+```
+
+Adding Getters and Setters:
+```java
+public String getEmail() {
+return email;
+}
+
+public void setEmail(String email) {
+    if (!isStringParameterValid(email)) {
+        throw new IllegalArgumentException("Invalid parameters");
+    }
+    this.email = email;
+}
+```
+
+Adding a line to toString() method:
+```java
+", email='" + email + '\'' +
+```
+
+3. **Adding email app.js file**
+
+Adding to EmployeeList the following line:
+```javascript
+<th>Email</th>
+```
+
+Adding to Employee the following line:
+```javascript
+<td>{this.props.employee.email}</td>
+```
+
+4. **Adding email DatabaseLoader.java file**
+
+Adding email field to parameters into the run():
+```java
+@Override
+public void run(String... strings) throws Exception { // <4>
+  this.repository.save(new Employee("Frodo", "Baggins", "hobbit", "ring bearer",2, "frodobag@lotr.com"));
+}
+```
+
+5. **Adding email to EmployeeTest.java file**
+
+Adding email parameter to all existing tests just like the example bellow:
+```java
+Employee employee = new Employee("Andre", "Salgado", "Graduated", "SWITCH Student", 1,"andre.msalgado@hotmail.com");
+```
+
+It was also needed to add some email assertations in some existing tests.
+
+Adding Setter Tests:
+```java
+@Test
+void testSetEmailValid() {
+  //arrenge
+  Employee employee = new Employee("Andre", "Salgado", "Graduated", "SWITCH Student", 1,"1241899@isep.ipp.pt");
+  //act
+  employee.setEmail("1234@isep.ipp.pt");
+  //assert
+  assertEquals("1234@isep.ipp.pt", employee.getEmail());
+}
+
+@Test
+void testSetEmailInvalid() {
+  //arrenge
+  Employee employee = new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1,"1241899@isep.ipp.pt");
+  //act + assert
+  assertThrows(IllegalArgumentException.class, () -> employee.setEmail(""));
+}
+```
+
 
 ## Part 2:
