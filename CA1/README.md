@@ -619,7 +619,8 @@ void testEmployeeConstructorInvalidEmail() {
 After these additions, the application continued to run successfully.
 
 8. **Merging **
-Once the fix is completed, it is time to commit and push changes and merge the branches.
+Once the fix is completed, it is time to commit and push changes and merge the branches as done in the previous steps.
+
 
 
 ####
