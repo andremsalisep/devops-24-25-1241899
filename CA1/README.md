@@ -131,9 +131,8 @@ public void setFirstName(String firstName) {
 
 7. **Adding new Getter and Setter for new fields:**
 
-```java
 Since news field were added, new getters and setters were added, including their validations:
-
+```java
 public String getJobTitle() {
     return jobTitle;
 }
@@ -560,5 +559,10 @@ void testSetEmailInvalid() {
 }
 ```
 
+6. **Running Application and Merge Branches**
+
+After everything is in place and with the application running correctly, it is time to merge the branches.
+Along this assignment some **git add .** and **git commit -m "message"** were made. After everything was set in place, a **git push -u origin email-field**.
+Now to merge the branches. We have to change our current branch to main with **git checkout main**, then 
 
 ## Part 2:
