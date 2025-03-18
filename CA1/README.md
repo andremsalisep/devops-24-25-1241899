@@ -428,6 +428,7 @@ void testSetId() {
 12. **Running Application and Debug:**
 
 To run the application we must first use the **cd** command in terminal to access the Basic folder and then **./mvnw spring-boot:run** to run it. Then to see if it is running, **http://localhost:8080/** is used.
+The application was running successfully but the debug image of the browser's react plugin will be displayed in the end of the Part 1.2.
 After that, we have confirmation that the new fields were successfully implemented.
 
 13. **Pushing and Tagging New Version:**
@@ -561,8 +562,20 @@ void testSetEmailInvalid() {
 
 6. **Running Application and Merge Branches**
 
+The application is started using the **./mvnw spring-boot:run** and using the react plugin in the browser we can see the debug as showed the image bellow:
+
+![Image](./assets/images/ssreact.jpg)
+
 After everything is in place and with the application running correctly, it is time to merge the branches.
 Along this assignment some **git add .** and **git commit -m "message"** were made. After everything was set in place, a **git push -u origin email-field**.
-Now to merge the branches. We have to change our current branch to main with **git checkout main**, then 
+Now to merge the branches. We have to change our current branch to main with **git checkout main**, then **git pull origin main** in case there are more people editing the repository.
+Once the main is up to date it is time to merger the email-field with the main branch with **git merge email-field**. There were no conflicts to resolve since there is no other person editing files.
+And at last, **git push origin main** and the tag command **git tag -a v1.3.0 -m "Version 1.3.0"**.
+
+7. **Adding Email Validation**
+
+In the task it is also asked to create a third branch with the name **fix-invalid-email**.
+The previous steps for creating a new branch will be repeated now. Only the validation solution will be displayed here.
+
 
 ## Part 2:
