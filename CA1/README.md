@@ -12,9 +12,12 @@
 - [Assignment Setup](#assignment-setup)
 - [Part 1: Developing in Master Branch](#part-1-developing-in-master-branch)
   - [Goals](#goals)
+  - [Part 1.1 Goals](#part-11-goals)
+  - [Part 1.2 Goals](#part-12-goals)
+  - [Alternative Solution Goals](#alternative-solution-goals)
   - [Development](#development)
-    - [Part 1.1](#part-11)
-    - [Part 1.2](#part-12)
+    - [Part 1.1: Developing in Master Branch](#part-11-developing-in-master-branch)
+    - [Part 1.2: Developing in Secondary Branch](#part-12-developing-in-secondary-branch)
 - [Part 2](#part-2)
 
 
@@ -28,6 +31,8 @@ Following that, I made a new repository named after DevOps / School Year / Stude
 ## Part 1
 
 ### Goals
+
+#### Part 1.1 Goals:
 -   Create CA1/part1 directory and copy the Basic folder from example repository into the new folder.
 -   Add a JobYears (integer) field to the application.
 -   Add support for the new field.
@@ -36,6 +41,21 @@ Following that, I made a new repository named after DevOps / School Year / Stude
 -   Once the new feature is completed (and tested) commit and push with a new tag (v1.2.0).
 -   At the end of the assignment mark the repository with the tag ca1-part1.1.
 
+#### Part 1.2 Goals:
+-   Create a branch called "email-field".
+-   Add support for the email field.
+-   Add related unit tests for Employees and the validation of their attributes.
+-   Merge with Master Branch and tag v1.3.0.
+-   Create a branch for fixing bugs called "fix-invalid-email".
+-   Add a validation to assure email field contains @.
+-   Merge with Master Branch and use a minor tag v1.3.1.
+-   At the end of the assignment mark the repository with the tag ca1-part1.2.
+
+#### Alternative Solution Goals:
+-   Present an alternative technological solution for version control not based on Git.
+-   Compare the alternative solution with Git.
+-   Describe how the new tool could be used.
+-   Implement this solution in the previous Assigment Parts.
 
 ### Development
 In the first part of the assignment setup tasks we are also asked to create a new folder using **mkdir CA1/part1** and then copied the Basic folder of the example application into part1 folder.
@@ -572,10 +592,37 @@ Now to merge the branches. We have to change our current branch to main with **g
 Once the main is up to date it is time to merger the email-field with the main branch with **git merge email-field**. There were no conflicts to resolve since there is no other person editing files.
 And at last, **git push origin main** and the tag command **git tag -a v1.3.0 -m "Version 1.3.0"**.
 
-7. **Adding Email Validation**
+7. **Adding @ Email Validation and Test**
 
 In the task it is also asked to create a third branch with the name **fix-invalid-email**.
 The previous steps for creating a new branch will be repeated now. Only the validation solution will be displayed here.
+
+Added the following method and used it in the constructor validations:
+```java
+private boolean isEmailValid(String email) {
+    return isStringParameterValid(email) && email.contains("@");
+}
+```
+
+Added the 3rd of the 4 asserts in the test:
+```java
+@Test
+void testEmployeeConstructorInvalidEmail() {
+    //arrenge + act + assert
+    assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "Graduated","SWITCH Student", 1,""));
+    assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "Graduated", "SWITCH Student", 1," "));
+    assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "Graduated", "SWITCH Student", 1,"a"));
+    assertThrows(IllegalArgumentException.class, () -> new Employee("Andre", "Salgado", "Graduated", "SWITCH Student", 1,null));
+}
+```
+
+After these additions, the application continued to run successfully.
+
+8. **Merging **
+Once the fix is completed, it is time to commit and push changes and merge the branches.
+
+
+####
 
 
 ## Part 2:

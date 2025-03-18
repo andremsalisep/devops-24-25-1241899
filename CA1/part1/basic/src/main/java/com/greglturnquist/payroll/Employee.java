@@ -39,7 +39,7 @@ public class Employee {
 	protected Employee() {}
 
 	public Employee(String firstName, String lastName, String description, String jobTitle, int jobYears, String email) {
-		if (!isStringParameterValid(firstName) || !isStringParameterValid(lastName) || !isStringParameterValid(description) || !isStringParameterValid(jobTitle) || !isJobYearsValid(jobYears) || !isStringParameterValid(email)) {
+		if (!isStringParameterValid(firstName) || !isStringParameterValid(lastName) || !isStringParameterValid(description) || !isStringParameterValid(jobTitle) || !isJobYearsValid(jobYears) || !isEmailValid(email)) {
 			throw new IllegalArgumentException("Invalid parameters");
 		}
 		this.firstName = firstName;
@@ -163,5 +163,9 @@ public class Employee {
 	private boolean isJobYearsValid(int x) {
 		return x >= 0;
     }
+
+	private boolean isEmailValid(String email) {
+		return isStringParameterValid(email) && email.contains("@");
+	}
 }
 // end::code[]
