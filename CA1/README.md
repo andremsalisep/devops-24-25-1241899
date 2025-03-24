@@ -30,34 +30,6 @@ Following that, I made a new repository named after DevOps / School Year / Stude
 
 ## Part 1
 
-### Goals
-
-#### Part 1.1 Goals:
--   Create CA1/part1 directory and copy the Basic folder from example repository into the new folder.
--   Add a JobYears (integer) field to the application.
--   Add support for the new field.
--   Add unit tests for testing the creation of Employees and the validation of their attributes (for instance, no null/empty values).
--   Debug the server and client parts of the solution.
--   Once the new feature is completed (and tested) commit and push with a new tag (v1.2.0).
--   At the end of the assignment mark the repository with the tag ca1-part1.1.
-
-#### Part 1.2 Goals:
--   Create a branch called "email-field".
--   Add support for the email field.
--   Add related unit tests for Employees and the validation of their attributes.
--   Merge with Master Branch and tag v1.3.0.
--   Create a branch for fixing bugs called "fix-invalid-email".
--   Add a validation to assure email field contains @.
--   Merge with Master Branch and use a minor tag v1.3.1.
--   At the end of the assignment mark the repository with the tag ca1-part1.2.
-
-#### Alternative Solution Goals:
--   Present an alternative technological solution for version control not based on Git.
--   Compare the alternative solution with Git.
--   Describe how the new tool could be used.
--   Implement this solution in the previous Assigment Parts.
-
-### Development
 In the first part of the assignment setup tasks we are also asked to create a new folder using **mkdir CA1/part1** and then copied the Basic folder of the example application into part1 folder.
 After the part one setup, the first commit was made and pushed using the commands **git add .** and **git commit -m "Added basic files to repository"**. This first commit was then pushed via **git push -u origin master**.
 Following that, the commit was tagged with the command **git tag -a v1.1.0 -m "version 1.1.0"** and pushed with **git push --tags**.
@@ -67,6 +39,17 @@ It is worth mentioning that later in the development of Part 1 I noticed that in
 Even tho it was included in a later fix, the development notes will consider it as being integrated at same time as JobYears.
 
 #### Part 1.1: Developing in Master Branch
+
+##### Part 1.1 Goals
+-   Create CA1/part1 directory and copy the Basic folder from example repository into the new folder.
+-   Add a JobYears (integer) field to the application.
+-   Add support for the new field.
+-   Add unit tests for testing the creation of Employees and the validation of their attributes (for instance, no null/empty values).
+-   Debug the server and client parts of the solution.
+-   Once the new feature is completed (and tested) commit and push with a new tag (v1.2.0).
+-   At the end of the assignment mark the repository with the tag ca1-part1.1.
+
+##### Part 1.1 Development
 
 1. **Adding JobYears to Atributes:**
 
@@ -465,6 +448,18 @@ With all that done, and the readme file ready, it is time to push the commits an
 
 #### Part 1.2: Developing in Secondary Branch
 
+##### Part 1.2 Goals
+-   Create a branch called "email-field".
+-   Add support for the email field.
+-   Add related unit tests for Employees and the validation of their attributes.
+-   Merge with Master Branch and tag v1.3.0.
+-   Create a branch for fixing bugs called "fix-invalid-email".
+-   Add a validation to assure email field contains @.
+-   Merge with Master Branch and use a minor tag v1.3.1.
+-   At the end of the assignment mark the repository with the tag ca1-part1.2.
+
+##### Part 1.2 Development
+
 1. **Creating a new Branch**
 
 To create a new branch to develop the email field, we start using the command **git checkout -b email-field**.
@@ -618,12 +613,74 @@ void testEmployeeConstructorInvalidEmail() {
 
 After these additions, the application continued to run successfully.
 
-8. **Merging **
+8. **Merging**
 Once the fix is completed, it is time to commit and push changes and merge the branches as done in the previous steps.
+And for last, we tag mark the repository as **ca1-part1.2** and the task is done.
 
 
 
-####
+#### Alternative Solution
+
+##### Alternative Solution Goals
+-   Present an alternative technological solution for version control not based on Git.
+-   Compare the alternative solution with Git.
+
+For this assignment, Apache Subversion (SVN) is proposed as an alternative to Git for version control.
+SVN is a centralized version control system (VCS) that manages files and directories over time, tracking changes in a single repository.
+It has a more strict control over the changes that are made in the code, since everything goes through a centralized server.
+Below, are comparisons of SVN to Git:
+
+**Git vs SVN**
+
+| Feature                  | Git (Distributed)                         | SVN (Centralized)                       |
+|--------------------------|-------------------------------------------|-----------------------------------------|
+| Repository Model         | Each developer has a full copy            | Only one central repository             |
+| Branching                | Lightweight and fast                      | Heavier (branches are full copies)      |
+| Merging                  | Efficient and frequent                    | Can be more complex                     |
+| Access Control           | Requires additional tools                 | Native and granular control             |
+| Large Files Handling     | Can slow down                             | Better performance with large files     |
+| Connectivity Requirement | Works offline, syncs later                | Requires constant connection            |
+| Version Tagging          | Uses lightweight tags                     | Copies folders in the `tags/` directory |
+|--------------------------|-------------------------------------------|-----------------------------------------|
+
+**Advantages of SVN**
+
+It is better if your team need a stronger control over versions and user permissions.
+SVN is more friendly for newer users since it follows the client-server traditional model.
+
+**Disadvantages of SVN**
+
+It does not allow offline commits. Since a central repository is used, the user must be online at all time.
+Can be slower due in bigger projects due to the possible high amount of live changes in the repository.
+
+**Which one to choose?**
+
+If you need a more strict control and have possible less people editing the same repository, SVN seems like a good git alternative to choose.
+But if you have a larger amount of people making changes in the code, Git seems to be the best solution.
 
 
-## Part 2:
+## Part 2: Build Tools with Gradle
+
+### Part 2 Goals
+
+-   Create Part 2 Folder inside CA1.
+-   Download Example application and commit to this repository.
+-   Execute the server.
+-   Add unit tests and update gradle script so that it is able to execute the test.
+-   Add a new task of type **Copy** to be used to make a backup of the sources of the application.
+-   Add a new task of type Zip to be used to make an archive (i.e., zip file) of the sources of the application.
+-   Mark your repository with the tag ca1-part2.
+
+### Part 2 Setup
+
+**Creating the folder**
+In the setup of this part, we must first create the part2 folder inside CA1.
+We have to access the CA1 folder using **cd CA1** and then create the folder using **mkdir part2**.
+
+**Downloading application**
+To download the application, we have to first access our part2 folder using **cd part2**.
+Then it was used the command **git clone --depth=1 <example-app-URL>.git gradle_basic_demo**.
+Since we want only the application, free from the original repository link, we have to remove it's .git folder using the **rm -rf gradle_basic_demo/.git** command.
+
+### Part 2 Development
+
