@@ -681,6 +681,25 @@ We have to access the CA1 folder using **cd CA1** and then create the folder usi
 To download the application, we have to first access our part2 folder using **cd part2**.
 Then it was used the command **git clone --depth=1 <example-app-URL>.git gradle_basic_demo**.
 Since we want only the application, free from the original repository link, we have to remove it's .git folder using the **rm -rf gradle_basic_demo/.git** command.
+After the setup, we just have to commit and push changes.
 
 ### Part 2 Development
+
+**Making the application run**
+
+First part of the assignment is to try to make the project run.
+After an unsuccessful atempt, it was noted that a Java 17 needed to be installed.
+Following the installing, the project was set to work with the jdk17 version.
+Now the gradle.properties file received a new line with the following text: **org.gradle.java.home=C:\\Program Files\\Java\\jdk-17**.
+This extra line ensured that gradle build used the jdk17 instead of the newer version.
+After that the build file was successfully made.
+
+**Running the application**
+
+With the initial part done, it is now time to run the application.
+For that we use the commands provided in the example project readme file: **java -cp build/libs/basic_demo-0.1.0.jar basic_demo.ChatServerApp 59001**
+Then 2 new terminal windows were opened and the following command was used: **./gradlew runClient**
+With that we were able to successfully make 2 chat windows that talked to each other as the example bellow:
+
+![Image](./assets/images/sschat1.jpg)
 
