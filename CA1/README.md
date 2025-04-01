@@ -703,3 +703,55 @@ With that we were able to successfully make 2 chat windows that talked to each o
 
 ![Image](./assets/images/sschat1.jpg)
 
+**Adding a new Task**
+
+To make a new task we have to go to build.gradle file and add at the end the following:
+
+```gradle
+task runServer(type: JavaExec, dependsOn: classes) {
+group = "DevOps"
+description = "Launches the chat server on port 59001"
+
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'basic_demo.ChatServerApp'  // Nome correto da classe
+
+    args '59001' // Porta do servidor
+}
+```
+
+Then to run the application we have to go to the correct folder using **cd CA1/part2/gradle_basic_demo**.
+And run the following command:
+
+```sh
+./gradlew runServer
+```
+
+**Making Unit Tests**
+
+To make the unit test we have first to prepare our build.gradle file adding the following line to the dependencies field: **testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'**.
+Then we can run again the **./gradlew build** so it build properly.
+Next change directory in the terminal to src folder using **cd** and **mkdir test\java\basic_demo\**.
+Following that we just create the test file.
+In order to run the tests successfully the imports from the test file needed to be set to correct version of JUnit:
+
+```java
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+```
+Once everything is in place, just had to run the tests:
+
+![Image](./assets/images/ssgradletests.jpg)
+
+**Copy Task**
+
+To create a copy task as required in the guidelines, we have to use:
+
+```groovy
+task backupSources(type: Copy) {
+from 'src'
+into 'backup'
+include '**/*'
+}
+```
+
+Then when we run this task it creates the backup folder and puts all content from src inside the new folder.
