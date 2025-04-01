@@ -11,14 +11,16 @@
 - [Introduction](#introduction)
 - [Assignment Setup](#assignment-setup)
 - [Part 1: Developing in Master Branch](#part-1-developing-in-master-branch)
-  - [Goals](#goals)
-  - [Part 1.1 Goals](#part-11-goals)
-  - [Part 1.2 Goals](#part-12-goals)
+  - [Part 1.1: Goals](#part-11-goals)
+  - [Part 1.1: Development](#part-11-development)
+  - [Part 1.2: Goals](#part-12-goals)
+  - [Part 1.2: Development](#part-12-development)
   - [Alternative Solution Goals](#alternative-solution-goals)
-  - [Development](#development)
-    - [Part 1.1: Developing in Master Branch](#part-11-developing-in-master-branch)
-    - [Part 1.2: Developing in Secondary Branch](#part-12-developing-in-secondary-branch)
-- [Part 2](#part-2)
+  - [Alternative Solution Development](#alternative-solution-development)
+- [Part 2: Build Tools with Gradle](#part-2-build-tools-with-gradle)
+  - [Part 2 Goals](#part-2-goals)
+  - [Part 2 Setup](#part-2-setup)
+  - [Part 2 Development](#part-2-development)
 
 
 ## Introduction
@@ -754,4 +756,27 @@ include '**/*'
 }
 ```
 
-Then when we run this task it creates the backup folder and puts all content from src inside the new folder.
+Then when we run this task using **./gradlew backupSources** and it will create the backup folder and puts all content from src inside the new folder.
+
+**Zip Task**
+
+To make the zip file we just have to add the following task:
+```groovy
+task zipSources(type: Zip) {
+from 'src'
+archiveFileName = 'sources-backup.zip'
+destinationDirectory = file('backup')
+include '**/*'
+}
+```
+And run with **./gradlew zipSources**.
+
+**Result, Commit and Tag**
+
+As we can see in the image bellow, the tasks runned successfully:
+
+![Image](./assets/images/ssendpart2.jpg)
+
+With everything in place, we just have to commit and then tag the files with **git tag ca1-part2**.
+
+**End of Part 2.**
