@@ -805,3 +805,80 @@ With everything in place, we just have to commit and then tag the files with **g
 
 ### Part 3 Development
 
+**Creating a new branch**
+
+As already mentioned in previous topics, to create a new branch simply type in the terminal **git checkout -b tut-basic-gradle**.
+That was the name it was asked in the assignment.
+
+**Starting a new spring boot project**
+
+As also in the assignment instructions, I went to https://start.spring.io/ and generated a new project with **Rest Repositories, Thymeleaf, JPA, H2** dependencies.
+
+**Extracting Project into Repository**
+
+A new folder was created (CA1/part3/) into the repository using the **mkdir** command.
+To extract the content of the zip file created in the previous topic, we have to use the following command in the terminal:
+```sh
+powershell -command "Expand-Archive -Path 'C:\Users\ACER\Downloads\demo.zip' -DestinationPath 'D:\Andre\Switch\Projetos\Devops\devops-24-25-1241899\CA1\part3' -Force"
+```
+Then we have to run the command **./gradlew tasks** in the terminal to execute the tasks.
+Once the configuration is done, we can move to the next step.
+
+**Replacing src folder**
+
+To delete the src folder that comes with the demo, we can run in the terminal the command:
+```sh
+powershell -command "Remove-Item -Path 'D:\Andre\Switch\Projetos\Devops\devops-24-25-1241899\CA1\part3\demo\src' -Recurse -Force"
+```
+To copy the src folder from Part 1 into the Part 3 project, we have to use the following command:
+```sh
+powershell -command "Copy-Item -Path 'D:\Andre\Switch\Projetos\Devops\devops-24-25-1241899\CA1\part1\basic\src' -Destination 'D:\Andre\Switch\Projetos\Devops\devops-24-25-1241899\CA1\part3\demo\' -Recurse -Force"
+```
+The same is true for the **webpack.config.js** and **package.json** files.
+Following that, it is asked to also delete the folder **built** inside ** src/main/resources/static**.
+To do so I used the following command:
+```sh
+powershell -command "Remove-Item -Path 'D:\Andre\Switch\Projetos\Devops\devops-24-25-1241899\CA1\part3\demo\src\main\resources\static\built' -Recurse -Force"
+```
+We can now move to the next topic.
+
+**Experiment with the Application**
+
+To run the application we have to use the **./gradlew bootRun** command inside the **CA1/part3/demo/** folder.
+At first try, the build failed. I tried using the **./gradlew clean bootRun** to see if the problem is solved.
+The problem was also not solved. So I tried to update imports in the Employee.java class as bellow:
+```java
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+```
+After that, the **./gradlew bootRun** command runned successfully as displayed bellow:
+![Image](./assets/images/sspart3apprunning.jpg)
+The locahost also showed a blank page as described in the assignment PDF.
+
+**Add the gradle frontend plugin**
+
+When the time came to finally add the plugin, even following the instructions I had a lot of trouble to make the build successfully run with the frontend plugin.
+After tweaking for several hours, it is finally running.
+
+![Image](./assets/images/ssfrontendok.jpg)
+
+**Adding Copy and Clean Tasks**
+
+Added to build.gradle file the following tasks:
+```groovy
+task copyJar(type: Copy) {
+  dependsOn bootJar
+  from bootJar.outputs
+  into file("dist")
+}
+task cleanWebpack(type: Delete) {
+  delete 'src/main/resources/static/built'
+}
+clean.dependsOn cleanWebpack
+```
+
+**Adding a Tag**
+
+With everything in place and working, there is only the tag adding part now.
+**git tag ca1-part3**.
