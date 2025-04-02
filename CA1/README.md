@@ -15,12 +15,18 @@
   - [Part 1.1: Development](#part-11-development)
   - [Part 1.2: Goals](#part-12-goals)
   - [Part 1.2: Development](#part-12-development)
-  - [Alternative Solution Goals](#alternative-solution-goals)
-  - [Alternative Solution Development](#alternative-solution-development)
+  - [Alternative Solution: Goals](#alternative-solution-goals)
+  - [Alternative Solution: Explanation](#alternative-solution-explanation)
 - [Part 2: Build Tools with Gradle](#part-2-build-tools-with-gradle)
-  - [Part 2 Goals](#part-2-goals)
-  - [Part 2 Setup](#part-2-setup)
-  - [Part 2 Development](#part-2-development)
+  - [Part 2: Goals](#part-2-goals)
+  - [Part 2: Setup](#part-2-setup)
+  - [Part 2: Development](#part-2-development)
+- [Part 3: Basic from Maven to Gradle](#part-3-basic-from-maven-to-gradle)
+  - [Part 3: Goals](#part-3-goals)
+  - [Part 3: Development](#part-3-development)
+  - [Alternative Solution: Goals](#alternative-solution-goals)
+  - [Alternative Solution: Explanation](#alternative-solution-explanation)
+
 
 
 ## Introduction
@@ -627,6 +633,7 @@ And for last, we tag mark the repository as **ca1-part1.2** and the task is done
 -   Present an alternative technological solution for version control not based on Git.
 -   Compare the alternative solution with Git.
 
+##### Alternative Solution Explanation
 For this assignment, Apache Subversion (SVN) is proposed as an alternative to Git for version control.
 SVN is a centralized version control system (VCS) that manages files and directories over time, tracking changes in a single repository.
 It has a more strict control over the changes that are made in the code, since everything goes through a centralized server.
@@ -882,3 +889,33 @@ clean.dependsOn cleanWebpack
 
 With everything in place and working, there is only the tag adding part now.
 **git tag ca1-part3**.
+
+### Alternative Solution
+
+#### Alternative Solution Goals
+-   Present an alternative tool compares to Gradle regarding build automation features.
+-   Describe how the alternative tool could be used to solve the same goals as presented for this assignment.
+
+#### Alternative Solution Explanation
+
+The chosen tool to be compared was Apache Ant.
+Gradle and Apache Ant are both popular tools for build automation, but they differ significantly in how they handle builds and extensions.
+Gradle is a modern and flexible tool that uses a domain-specific language (DSL) based on Groovy or Kotlin for configuration.
+It offers built-in support for dependency management, incremental builds, and parallel execution, which significantly optimizes build times for large projects.
+Additionally, Gradle’s build process is task-based, where each task can be customized, combined, or extended, allowing for highly flexible and efficient build workflows.
+One of Gradle's key strengths is its ability to easily integrate third-party plugins or allow users to create their own plugins using Groovy, Kotlin, or Java.
+For example, defining custom tasks or adding new functionality through plugins is relatively simple, making it easier for teams to extend Gradle’s capabilities to suit their needs.
+
+On the other hand, Apache Ant is a more traditional and procedural build tool that uses XML configuration files (build.xml) to define build steps.
+Unlike Gradle, Ant does not have built-in support for dependency management (though it can integrate with Ivy), and its configuration is more verbose.
+While Ant is customizable, it requires more effort to define each task and its dependencies manually.
+The build process in Ant is also not as optimized, lacking features like parallel execution and incremental builds, which can lead to longer build times for larger projects.
+When it comes to extending Ant, users can write custom tasks in Java, which are packaged as JAR files and integrated into the build.
+While this provides flexibility, it is not as dynamic or user-friendly as Gradle’s approach to custom tasks and plugins, and writing custom tasks in Ant often requires more code and setup.
+
+If we were to use Apache Ant to achieve the same goals as Gradle, the process would look somewhat different.
+For example, to define custom functionality or tasks in Ant, you would first need to write a custom task in Java, compile it, and then define it in your build.xml file.
+Ant’s build files would contain a series of targets, each representing a unit of work, and these targets would be manually linked to each other through dependencies.
+While Gradle’s more flexible and declarative approach to defining tasks allows for easier integration and management of tasks, Ant would require more boilerplate code and explicit task management.
+Additionally, features such as incremental builds and parallel execution would need to be manually configured or would not be available out-of-the-box.
+Therefore, while Ant could certainly be used to achieve similar goals as Gradle, it would involve more complex configurations and potentially less efficient builds, especially for larger projects.
