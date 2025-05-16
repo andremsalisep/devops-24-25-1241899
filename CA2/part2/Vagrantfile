@@ -1,6 +1,7 @@
 # See: https://manski.net/2016/09/vagrant-multi-machine-tutorial/
 # for information about machine names on private network
 Vagrant.configure("2") do |config|
+    config.ssh.forward_agent = true
   config.vm.box = "ubuntu/bionic64"
 
   # This provision is common for both VMs
