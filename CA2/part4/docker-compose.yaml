@@ -1,0 +1,31 @@
+services:
+  web:
+    build: ./web
+    ports:
+      - "8080:8080"
+    networks:
+      my_custom_network:
+        ipv4_address: 192.168.56.10
+    depends_on:
+      - db
+
+  db:
+    build: ./db
+    ports:
+      - "8082:8082"
+      - "9092:9092"
+    volumes:
+      - ./data:/usr/src/data-backup
+    networks:
+      my_custom_network:
+        ipv4_address: 192.168.56.11
+
+networks:
+  my_custom_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "192.168.56.0/24"
+
+volumes:
+  db_data: {}
