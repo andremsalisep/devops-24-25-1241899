@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.greglturnquist.payroll.EmployeeTest" tests="25" skipped="0" failures="0" errors="0" timestamp="2025-04-02T02:45:13" hostname="LAPTOP-60KM1T9E" time="0.184">
+<testsuite name="com.greglturnquist.payroll.EmployeeTest" tests="25" skipped="0" failures="0" errors="0" timestamp="2025-05-19T17:42:32" hostname="LAPTOP-60KM1T9E" time="0.141">
   <properties/>
-  <testcase name="testEmployeeConstructorInvalidJobTitle()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.036"/>
+  <testcase name="testEmployeeConstructorInvalidJobTitle()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.032"/>
   <testcase name="testEmployeeConstructorInvalidLastName()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.003"/>
   <testcase name="testSetDescriptionInvalid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.005"/>
-  <testcase name="testEmployeeConstructorInvalidFirstName()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.004"/>
-  <testcase name="testSetJobYearsInvalid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.005"/>
-  <testcase name="testSetLastNameInvalid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.003"/>
-  <testcase name="testGetId()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.003"/>
-  <testcase name="testSetId()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.006"/>
+  <testcase name="testEmployeeConstructorInvalidFirstName()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.002"/>
+  <testcase name="testSetJobYearsInvalid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.002"/>
+  <testcase name="testSetLastNameInvalid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.002"/>
+  <testcase name="testGetId()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.002"/>
+  <testcase name="testSetId()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.003"/>
   <testcase name="testSetFirstNameInvalid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.002"/>
-  <testcase name="testToString()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.03"/>
-  <testcase name="testSetFirstNameValid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.001"/>
-  <testcase name="testSetJobTitleInvalid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.003"/>
-  <testcase name="testEmployeeConstructorInvalidDescription()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.004"/>
+  <testcase name="testToString()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.021"/>
+  <testcase name="testSetFirstNameValid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.002"/>
+  <testcase name="testSetJobTitleInvalid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.001"/>
+  <testcase name="testEmployeeConstructorInvalidDescription()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.003"/>
   <testcase name="testEmployeeConstructorInvalidJobYear()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.003"/>
-  <testcase name="testSetEmailValid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.002"/>
-  <testcase name="shouldSuccessfullyCreateAnObjectEmployee()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.003"/>
-  <testcase name="testEmployeeConstructorInvalidEmail()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.004"/>
+  <testcase name="testSetEmailValid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.001"/>
+  <testcase name="shouldSuccessfullyCreateAnObjectEmployee()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.001"/>
+  <testcase name="testEmployeeConstructorInvalidEmail()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.003"/>
   <testcase name="testSetLastNameValid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.001"/>
   <testcase name="testSetDescriptionValid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.001"/>
-  <testcase name="testSetEmailInvalid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.001"/>
+  <testcase name="testSetEmailInvalid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.002"/>
   <testcase name="testEqualsAndHashCodeWithIdenticalEmployees()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.002"/>
-  <testcase name="testSetJobTitleValid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.002"/>
+  <testcase name="testSetJobTitleValid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.001"/>
   <testcase name="testSetJobYearsValid()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.002"/>
-  <testcase name="testEqualsAndHashCodeWithDifferentEmployees()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.005"/>
-  <testcase name="testEmployeeConstructorNoArgs()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.002"/>
+  <testcase name="testEqualsAndHashCodeWithDifferentEmployees()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.003"/>
+  <testcase name="testEmployeeConstructorNoArgs()" classname="com.greglturnquist.payroll.EmployeeTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
