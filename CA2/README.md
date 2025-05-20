@@ -7,6 +7,23 @@
 **Institution:** ISEP
 
 ## Table of Contents
+1. [Introduction](#introduction)
+2. [Part 1 VirtualBox](#part-1-virtualbox)
+    - [Part 1 Goals](#part-1-goals)
+    - [Part 1 Development](#part-1-development)
+    - [Part 1 Conclusion](#part-1-conclusion)
+3. [Part 2 Vagrant](#part-2-vagrant)
+    - [Part 2 Goals](#part-2-goals)
+    - [Part 2 Development](#part-2-development)
+    - [Part 2 Conclusion](#part-2-conclusion)
+4. [Part 3 Docker](#part-3-docker)
+    - [Part 3 Goals](#part-3-goals)
+    - [Part 3 Development](#part-3-development)
+    - [Part 3 Conclusion](#part-3-conclusion)
+5. [Part 4 Docker Compose](#part-4-docker-compose)
+    - [Part 4 Goals](#part-4-goals)
+    - [Part 4 Development](#part-4-development)
+    - [Part 4 Conclusion](#part-4-conclusion)
 
 ## Introduction
 This report details the **Class Assignment 2**  for the DevOps course. This assignment has four parts:
@@ -14,7 +31,7 @@ This report details the **Class Assignment 2**  for the DevOps course. This assi
 **Part 1** VirtualBox
 **Part 2** Vagrant
 **Part 3** Docker 
-**Part 4** Docker Composer
+**Part 4** Docker Compose
 
 Project results are detailed in the **Final Results** section.
 
@@ -447,7 +464,7 @@ With all done, we were able to see that I successfully containerized a chat serv
 The first version consisted in building the application within the Dockerfile, while the second version was about building the application in the host machine and copying the WAR file into the Docker image.
 Both versions demonstrated the use of Docker in managing and deploying applications consistently across various environments.
 
-## Part 4 Docker Composer
+## Part 4 Docker Compose
 This assignment consists in using Docker to setup a containerized environment to execute my version of the gradle version of the spring basic tutorial application.
 
 ### Part 4 Goals
