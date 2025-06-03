@@ -85,9 +85,10 @@ pipeline {
         dir('CA1/part3/demo') {
           echo 'Building & Pushing Docker image...'
           script {
-            def app = docker.build("${env.DOCKER_IMAGE}:${env.BUILD_NUMBER}", '.')
-            docker.withRegistry(env.DOCKER_REGISTRY, env.DOCKER_CREDENTIALS_ID) {
-              app.push()
+            withEnv(["DOCKER_TLS_VERIFY=", "DOCKER_CERT_PATH="]) {
+              def app = docker.build("${env.DOCKER_IMAGE}:${env.BUILD_NUMBER}", '.')
+              docker.withRegistry(env.DOCKER_REGISTRY, env.DOCKER_CREDENTIALS_ID) {
+                app.push()
             }
           }
         }
