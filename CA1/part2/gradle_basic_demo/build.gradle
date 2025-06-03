@@ -27,7 +27,7 @@ dependencies {
     implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.2'
 
     // Dependência para os testes com JUnit 5
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation group: 'junit', name: 'junit', version:'4.12'
 }
  
 
