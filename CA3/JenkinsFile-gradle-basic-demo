@@ -4,7 +4,7 @@ pipeline {
     stage('Checkout') {
       steps {
         echo 'Checking out from repository'
-        git url: 'https://github.com/andremsalisep/devops-24-25-1241899.git', branch: 'main'
+        git credentialsId: 'gitcredentials', url: 'https://github.com/andremsalisep/devops-24-25-1241899.git', branch: 'main'
       }
     }
     stage('Assemble') {
