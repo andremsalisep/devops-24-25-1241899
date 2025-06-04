@@ -3,7 +3,7 @@ pipeline {
 
   environment {
     DOCKER_CREDENTIALS_ID = 'docker-credentials'
-    DOCKER_IMAGE          = 'andremsalisep/springboot-app'
+    DOCKER_IMAGE          = 'andremsalisep/jenkins-image'
     DOCKER_REGISTRY       = 'https://index.docker.io/v1/'
     REPO_URL              = 'https://github.com/andremsalisep/devops-24-25-1241899.git'
     DOCKER_HOST           = 'tcp://host.docker.internal:2375'
