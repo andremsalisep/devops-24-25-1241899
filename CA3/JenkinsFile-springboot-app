@@ -25,9 +25,9 @@ pipeline {
    writeFile file: 'Dockerfile', text: '''
    FROM eclipse-temurin:17-jdk
    WORKDIR /app
-   COPY build/libs/*.jar app.jar
+   COPY build/libs/*.war app.war
    EXPOSE 8080
-   ENTRYPOINT ["java","-jar","app.jar"]
+   ENTRYPOINT ["java","-war","app.war"]
    '''
 
           }
@@ -76,7 +76,7 @@ pipeline {
       steps {
         dir('CA1/part3/demo') {
           echo 'Archiving...'
-          archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
+          archiveArtifacts artifacts: 'build/libs/*.war', fingerprint: true
         }
       }
     }
